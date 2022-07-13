@@ -1,24 +1,66 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import {Accordion} from "./Accordion";
+
+export interface IItems {
+  title: string
+  descr: string,
+  children?: IItems[]
+}
 
 function App() {
+  const [items] = useState<IItems[]>([
+    {
+      title: 'Ut nec elit eu purus ultrices',
+      descr: 'Nulla gravida porta lorem non consectetur',
+    },
+    {
+      title: 'Duis lobortis',
+      descr: 'Nullam ac tincidunt ante',
+      children: [
+        {
+          title: 'Lobortis #1',
+          descr: 'Phasellus gravida',
+        },
+        {
+          title: 'Lobortis #2',
+          descr: 'Phasellus gravida',
+        },
+        {
+          title: 'Lobortis #3',
+          descr: 'Phasellus gravida',
+        },
+      ],
+    },
+    {
+      title: 'Duis lobortis',
+      descr: 'Donec tincidunt neque turpis',
+      children: [
+        {
+          title: 'Duis #1',
+          descr: 'Quisque id feugiat sem',
+        },
+        {
+          title: 'Duis #2',
+          descr: 'Suspendisse eu interdum diam',
+          children: [
+            {
+              title: 'Porttitor #1',
+              descr: 'Donec porttitor ullamcorper magna',
+            },
+            {
+              title: 'Porttitor #2',
+              descr: 'Quisque id feugiat sem',
+            },
+          ],
+        },
+      ],
+    },
+  ])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Accordion data={items}/>
     </div>
   );
 }
